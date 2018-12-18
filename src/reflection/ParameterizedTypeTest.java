@@ -3,6 +3,10 @@ package reflection;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
+/**
+ * 行得通的方案
+ * @param <T>
+ */
 abstract class GenericType<T> {
     private Class<T> tClass;
     @SuppressWarnings("unchecked")
