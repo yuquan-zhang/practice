@@ -1,7 +1,7 @@
 package algorithms.sort;
 
 public class QuickSort {
-    private int[] ints = {12,3,56,9,5,11,45,32,2,90,33};
+    private int[] ints = {12,3,56,9,5,11,45,33,2,90,33};
     private int loops = 0;
 
     public void swap(int a, int b) {
