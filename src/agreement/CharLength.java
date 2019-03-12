@@ -8,5 +8,6 @@ public class CharLength {
         System.out.println(Integer.BYTES);
         System.out.println(Long.BYTES);
         System.out.println(Integer.toBinaryString(c));
+        System.out.println("".split(",").length);
     }
 }
