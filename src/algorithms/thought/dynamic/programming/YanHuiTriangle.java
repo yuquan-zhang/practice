@@ -18,6 +18,17 @@ public class YanHuiTriangle {
 
         int[] vs = {7,3,5};
         System.out.println(chargeCoin(vs,18));
+
+        int[] series = {2, 9, 3, 6, 5, 1, 7,9,10,4,5,6,7,9,10,11,12};
+        System.out.println("---- min sub series -----");
+        start = System.nanoTime();
+        System.out.println(minSubSeries(series));
+        end = System.nanoTime();
+        System.out.println(end - start);
+        start = System.nanoTime();
+        System.out.println(minSubSeries2(series));
+        end = System.nanoTime();
+        System.out.println(end - start);
     }
 
     private static int minPath(int[][] triangle) {
@@ -101,5 +112,56 @@ public class YanHuiTriangle {
         }
         if (!status[w]) return -1;
         return coins;
+    }
+
+    private static int minSubSeries(int[] series) {
+        return minSubSeries(series,series.length,0,Integer.MIN_VALUE);
+    }
+
+    /**
+     * 回溯算法 时间复杂度O(2^n), 空间复杂度O(1);
+     * @param series
+     * @param n
+     * @param p
+     * @param last
+     * @return
+     */
+    private static int minSubSeries(int[] series, int n, int p, int last) {
+        if (p == n) return 0;
+        int minSub1 = 0, minSub2;
+        if (last < series[p]) {
+            minSub1 = minSubSeries(series,n,p+1,series[p]) + 1;
+        }
+        minSub2 = minSubSeries(series,n,p+1,last);
+        return Math.max(minSub1,minSub2);
+    }
+
+    /**
+     * 动态规划 时间复杂度O(n^2),空间复杂度O(n^2)
+     * @param series
+     * @return
+     */
+    private static int minSubSeries2(int[] series) {
+        int len = series.length;
+        int[][] status = new int[len+1][len+1];
+        status[1][0] = 0;
+        status[1][1] = 1;
+        int last;
+        for (int i = 2; i <= len; ++i) {
+            for (int j = 0; j < i; ++j) {
+                last = j > 0 ? series[j-1] : Integer.MIN_VALUE;
+                if (last < series[i-1]) {
+                    if (status[i-1][j] + 1 > status[i][i]) {
+                        status[i][i] = status[i-1][j] + 1;
+                    }
+                }
+                status[i][j] = status[i-1][j];
+            }
+        }
+        int min = Integer.MIN_VALUE;
+        for (int i = 0; i <= len; ++i) {
+            if (min < status[len][i]) min = status[len][i];
+        }
+        return min;
     }
 }
