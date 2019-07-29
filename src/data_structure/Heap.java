@@ -1,92 +1,88 @@
 package data_structure;
 
-public class Heap<E extends Comparable<E>> extends Tree<E>{
 
+public class Heap<E extends Comparable<E>>{
 
-    @Override
-    public void insert(E data) {
-        Node<E> tempNode = new Node<>();
-        Node<E> current;
-        Node<E> parent;
+    private Object[] elements;
+    private int capacity;
+    private int count;
 
-        tempNode.data = data;
+    public Heap(int capacity) {
+        this.elements = new Object[capacity + 1];
+        this.count = 0;
+        this.capacity = capacity;
+    }
 
-        if(root == null) {
-            root = tempNode;
-        }else{
-            current = root;
-            while(true) {
-                parent = current;
-                tempNode.parent = parent;
+    public void insert(E e) {
+        if (count >= capacity) return;
+        ++count;
+        elements[count] = e;
+        heapify(count, false);
+    }
 
-                if(parent.leftChild == null) {
-                    parent.leftChild = tempNode;
-                    swap(tempNode);
-                    return;
-                }else if(parent.rightChild == null) {
-                    parent.rightChild = tempNode;
-                    swap(tempNode);
-                    return;
-                }else {
-                    if(Math.random() < 0.5)
-                        current = parent.rightChild;
-                    else
-                        current = parent.leftChild;
+    @SuppressWarnings("unchecked")
+    public E deleteTop() {
+        if (count <= 0) return null;
+        E top = (E)elements[1];
+        elements[1] = elements[count];
+        --count;
+        heapify(1, true);
+        return top;
+    }
+
+    @SuppressWarnings("unchecked")
+    private void heapify(int index, boolean isUpToDown) {
+        if (isUpToDown) {
+            while (true) {
+                int li = index * 2, ri = index * 2 + 1;
+                if (li > count) break;
+                E c = (E)elements[index], le = (E)elements[li];
+                if (ri > count) {
+                    if (le.compareTo(c) > 0) {
+                        swap(index, li);
+                        index = li;
+                    } else break;
+                } else {
+                    E re = (E)elements[ri];
+                    if (re.compareTo(le) > 0) {
+                        if (re.compareTo(c) > 0) {
+                            swap(index, ri);
+                            index = ri;
+                        } else break;
+                    } else {
+                        if (le.compareTo(c) > 0) {
+                            swap(index, li);
+                            index = li;
+                        } else break;
+                    }
                 }
+
+            }
+        } else {
+            while (index / 2 > 0) {
+                E c = (E)elements[index];
+                E p = (E)elements[index / 2];
+                if (c.compareTo(p) > 0) {
+                    swap(index, index / 2);
+                }
+                index = index / 2;
             }
         }
     }
 
-    public void swap(Node<E> newNode) {
-        while (newNode.parent != null) {
-            if(newNode.data.compareTo(newNode.parent.data) > 0) {
-                E temp = newNode.parent.data;
-                newNode.parent.data = newNode.data;
-                newNode.data = temp;
-                newNode = newNode.parent;
-            }else{
-                return;
-            }
-        }
-    }
-
-    @Override
-    public Node search(E data) {
-        return search(root,data);
-    }
-
-    public Node<E> search(Node<E> parent, E data) {
-        Node<E> result;
-        if(parent != null){
-            if(data.compareTo(parent.data) == 0) return parent;
-            else{
-                result = search(parent.leftChild,data);
-                if(result == null) result = search(parent.rightChild,data);
-                return result;
-            }
-        }
-        return null;
+    private void swap(int a, int b) {
+        Object t = elements[a];
+        elements[a] = elements[b];
+        elements[b] = t;
     }
 
     public static void main(String[] args) {
-        Heap<Integer> tree = new Heap<>();
-        int[] ints = {11,23,54,9,3,5,93,45,24,55,27,43,66};
-        for(int i : ints) {
-            tree.insert(i);
+        Heap<String> heap = new Heap<>(50);
+        String[] ints = {"a","b","c","g","e","f"};
+        for (String i : ints) {
+            heap.insert(i);
         }
-        Node node = tree.search(5);
-        if(node == null) {
-            System.out.println("node is not exist.");
-        }else{
-            System.out.println("node's data:" + node.data + ", parent's data:" + node.parent.data);
-        }
-        System.out.println("pre order traversal:");
-        tree.preOrderTraverse(tree.root);
-        System.out.println("in order traversal:");
-        tree.inOrderTraverse(tree.root);
-        System.out.println("post order traversal:");
-        tree.postOrderTraverse(tree.root);
+        System.out.println(heap.deleteTop());
     }
-
 
 }

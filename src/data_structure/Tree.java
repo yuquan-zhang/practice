@@ -1,5 +1,9 @@
 package data_structure;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 public class Tree<E extends Comparable<E>> {
     protected static class Node<E> {
         protected E data;
@@ -79,9 +83,26 @@ public class Tree<E extends Comparable<E>> {
         }
     }
 
+    public void levelOrderTraverse(Node<E> node) {
+        levelOrderTraverse(Collections.singletonList(node));
+    }
+
+    public void levelOrderTraverse(List<Node<E>> nodes) {
+        List<Node<E>> nextLevelNodes = new ArrayList<>(nodes.size() * 2);
+        for (Node<E> node : nodes) {
+            System.out.println(node.data);
+            if (null != node.leftChild) nextLevelNodes.add(node.leftChild);
+            if (null != node.rightChild) nextLevelNodes.add(node.rightChild);
+        }
+        if (nextLevelNodes.size() > 0) {
+            levelOrderTraverse(nextLevelNodes);
+        }
+    }
+
     public static void main(String[] args) {
         Tree<Integer> tree = new Tree<>();
-        int[] ints = {11,23,54,9,3,5,93,45,24,55,27,43,66};
+//        int[] ints = {11,23,54,9,3,5,93,45,24,55,27,43,66};
+        int[] ints = {3,2,1,4,5};
         for(int i : ints) {
             tree.insert(i);
         }
@@ -97,5 +118,7 @@ public class Tree<E extends Comparable<E>> {
         tree.inOrderTraverse(tree.root);
         System.out.println("post order traversal:");
         tree.postOrderTraverse(tree.root);
+        System.out.println("level order traversal:");
+        tree.levelOrderTraverse(tree.root);
     }
 }

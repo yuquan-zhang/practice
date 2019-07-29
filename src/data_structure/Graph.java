@@ -1,101 +1,101 @@
 package data_structure;
 
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Stack;
+
 public class Graph {
-    private class Vertex {
-        char label;
-        boolean visited;
+    private int n; // 定点的个数, the number of vertex
+    private LinkedList<Integer>[] adjs; // 邻接表, adjacent table
+
+    @SuppressWarnings("unchecked")
+    public Graph(int n) {
+        this.n = n;
+        adjs = new LinkedList[n];
+        for (int i = 0; i < n; ++i) {
+            adjs[i] = new LinkedList<>();
+        }
     }
 
-    private Vertex[] vertices = new Vertex[5];
-    private int[][] adjMatrix = new int[5][5];
-    private int vertexCount = 0;
-
-    public void addVertex(char label) {
-        Vertex vertex = new Vertex();
-        vertex.label = label;
-        vertex.visited = false;
-        vertices[vertexCount++] = vertex;
+    public void addEdge(int s, int t) { // 无向图一条边存两次
+        adjs[s].add(t);
+        adjs[t].add(s);
     }
 
-    public void addEdge(int start, int end) {
-        adjMatrix[start][end] = 1;
-        adjMatrix[end][start] = 1;
-    }
-
-    public void displayVertex(int vertexIndex) {
-        System.out.println(vertices[vertexIndex].label);
-    }
-
-    public int getAdjUnvisitedVertex(int vertexIndex) {
-        int i;
-        for(i = 0; i < vertexCount; i++) {
-            if(adjMatrix[vertexIndex][i] == 1 && !vertices[i].visited) {
-                return i;
+    public void bfs(int s, int t) {
+        if (s == t) return;
+        boolean[] visited = new boolean[n];
+        visited[s] = true;
+        Queue<Integer> queue = new LinkedList<>();
+        queue.add(s);
+        int[] pre = new int[n];
+        for (int i = 0; i < n; ++i) {
+            pre[i] = -1;
+        }
+        while (queue.size() > 0) {
+            int w = queue.poll();
+            for (int i = 0, len = adjs[w].size(); i < len; ++i) {
+                int q = adjs[w].get(i);
+                if (!visited[q]) {
+                    pre[q] = w;
+                    if (q == t) {
+                        print(pre, s, t);
+                        return;
+                    }
+                    queue.add(q);
+                    visited[q] = true;
+                }
             }
         }
-        return -1;
     }
 
-    public void depthFirstSearch() {
-        StackDemo<Integer> stack = new StackDemo<>(5);
-        vertices[0].visited = true;
-        displayVertex(0);
-        stack.push(0);
-
-        while(!stack.isEmpty()) {
-            int unvisitedVertex = getAdjUnvisitedVertex(stack.peek());
-            if(unvisitedVertex != -1) {
-                vertices[unvisitedVertex].visited = true;
-                displayVertex(unvisitedVertex);
-                stack.push(unvisitedVertex);
-            }else{
-                stack.pop();
-            }
+    private void print(int[] pre, int s, int t) { // 递归打印 s 到 t 的路径
+        if (pre[t] != -1 && t != s) {
+            print(pre, s, pre[t]);
         }
-        int i;
-        for(i = 0; i < vertexCount; i++) {
-            vertices[i].visited = false;
-        }
+        System.out.print(t + " ");
     }
 
-    public void breadthFirstSearch() {
-        QueueDemo<Integer> queue = new QueueDemo<>(5);
-        vertices[0].visited = true;
-        displayVertex(0);
-        queue.enQueue(0);
+    public void dfs(int s, int t) {
+        if (s == t) return;
+        boolean[] visited = new boolean[n];
+        Stack<Integer> stack = new Stack<>();
+        recurDfs(s, t, visited, stack);
+        String path = "";
+        while (!stack.empty()) {
+            path = stack.pop() + " " +  path;
+        }
+        System.out.println(path);
+    }
 
-        while(!queue.isEmpty()) {
-            int unvisitedVertex = getAdjUnvisitedVertex(queue.peek());
-            if(unvisitedVertex != -1) {
-                vertices[unvisitedVertex].visited = true;
-                displayVertex(unvisitedVertex);
-                queue.enQueue(unvisitedVertex);
-            }else{
-                queue.deQueue();
-            }
+    private void recurDfs(int s, int t, boolean[] visited, Stack<Integer> stack) {
+        visited[s] = true;
+        stack.push(s);
+        if (s == t) return;
+        for (int i = 0, len = adjs[s].size(); i < len; ++i) {
+            int q = adjs[s].get(i);
+            if (visited[q]) continue;
+            recurDfs(q, t, visited, stack);
+            if (stack.peek() == t) return;
         }
-        int i;
-        for(i = 0; i < vertexCount; i++) {
-            vertices[i].visited = false;
-        }
+        stack.pop();
     }
 
     public static void main(String[] args) {
-        Graph graph = new Graph();
-        graph.addVertex('S');
-        graph.addVertex('A');
-        graph.addVertex('B');
-        graph.addVertex('C');
-        graph.addVertex('D');
+        Graph graph = new Graph(8);
         graph.addEdge(0,1);
-        graph.addEdge(0,2);
         graph.addEdge(0,3);
+        graph.addEdge(1,2);
         graph.addEdge(1,4);
-        graph.addEdge(2,4);
         graph.addEdge(3,4);
-        System.out.println("Depth First Search: ");
-        graph.depthFirstSearch();
-        System.out.println("Breadth First Search: ");
-        graph.breadthFirstSearch();
+        graph.addEdge(2,5);
+        graph.addEdge(4,5);
+        graph.addEdge(4,6);
+        graph.addEdge(5,7);
+        graph.addEdge(6,7);
+        graph.bfs(0, 7);
+        System.out.println();
+        graph.dfs(0,7);
     }
+
 }
