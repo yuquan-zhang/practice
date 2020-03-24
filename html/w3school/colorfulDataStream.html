@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8"/>
+	<title>彩色数据流</title>
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+			overflow: hidden;
+		}
+		#canvas {
+			background-color: black;
+		}
+		#content {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100vw;
+			height: 100vh;
+			color: #00a7d0;
+			font-size: 36px;
+			z-index: 1;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="canvas" width="100vw" height="100vh">
+
+	</canvas>
+	<div id="content">
+<!--		我是前景-->
+	</div>
+<script>
+	function $E(id) {
+		return document.getElementById(id);
+	}
+
+	class ZeroOne {
+		constructor(num, x, y, s, c) {
+			this.num = num;
+			this.x = x;
+			this.y = y;
+			this.s = s;
+			this.c = "#" + c;
+		}
+		addY(height) {
+			this.y = (this.y + this.s) % height;
+		}
+		draw(ctx) {
+			ctx.fillStyle = this.c;
+			ctx.fillText(this.num, this.x, this.y);
+		}
+	}
+
+
+
+	window.onload = function () {
+		let canvas = $E("canvas");
+		let width = canvas.width = screen.availWidth;
+		let height = canvas.height = screen.availHeight;
+		let ctx = canvas.getContext("2d");
+		ctx.font = "30px Arial";
+
+		let zeroAndOnes = [];
+		(function () {
+			for (let i = 0; i < 2000; i++) {
+				let num = Math.random() > 0.5 ? 1 : 0;
+				let x = Math.floor(Math.random() * width);
+				let y = Math.floor(Math.random() * height);
+				let s = Math.random() + 1;
+				let c = Math.floor(Math.random() * 8388608);
+				zeroAndOnes.push(new ZeroOne(num,x,y,s,c));
+			}
+		})();
+
+		function renderZeroAndOne() {
+			ctx.clearRect(0,0,width,height);
+			zeroAndOnes.forEach(function (item) {
+				item.addY(height);
+				item.draw(ctx);
+			})
+		}
+		renderZeroAndOne();
+		setInterval(renderZeroAndOne, 10);
+	}
+</script>
+</body>
+</html>
