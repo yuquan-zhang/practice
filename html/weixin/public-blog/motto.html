@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8"/>
+	<title>一句话道理</title>
+	<style>
+		.container {
+			position: relative;
+			width: 400px;
+			height: 480px;
+			border: 4px inset gold;
+			box-shadow: 4px 4px 4px #bebfbe;
+			margin: 50px auto;
+			background-color: black;
+			color: white;
+			font-family: "Songti SC", serif;
+		}
+		.motto {
+			margin: auto;
+			width: 350px;
+			font-family: STFangsong,"华文仿宋", serif;
+			font-size: 20px;
+			line-height: 30px;
+			padding-top: 100px;
+			/*text-indent: 40px;*/
+			text-align: center;
+			white-space: pre-line;
+		}
+		.line {
+			margin: auto;
+			border-top: 1px solid #eae9d1;
+			width: 200px;
+			text-align: center;
+		}
+		.footer {
+			width: 350px;
+			color: #c4bb88;
+		}
+		.date {
+			width: 200px;
+			height: 40px;
+			text-align: left;
+			position: absolute;
+			bottom: 20px;
+			left: 25px;
+		}
+		.logo {
+			border: 4px outset #c4bb88;
+			border-left: none;
+			border-bottom: none;
+			width: 40px;
+			height: 60px;
+			text-align: right;
+			position: absolute;
+			bottom: 20px;
+			right: 25px;
+			writing-mode: vertical-rl;
+			letter-spacing: 2px;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="motto">
+			害怕什么，就去做什么。
+		</div>
+		<br/>
+		<div class="line">
+			<br/>
+<!--			章勇-->
+		</div>
+		<div class="footer">
+			<div id="date" class="date"></div>
+			<div class="logo">一句话的道理</div>
+		</div>
+	</div>
+<script>
+	let now = new Date();
+	let weeks = ["日","一","二","三","四","五","六"];
+	let dateStr = now.getFullYear() + "年" + (now.getMonth()+1) + "月" + now.getDate() + "日·星期" + weeks[now.getDay()];
+	document.getElementById("date").innerText = dateStr;
+
+</script>
+</body>
+</html>
