@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SVG流程图</title>
+</head>
+<body>
+<div>
+    <svg height="100" width="100">
+        <circle cx="50" cy="50" r="49" stroke="red" stroke-width="1" fill="lightblue" />
+        <text x="5" y="55" fill="black">售后申报案件</text>
+        抱歉，你的浏览器不支持内嵌SVG。
+    </svg>
+    <svg height="100" width="110">
+        <polyline points="5,50 100,50 90,40 100,50 90,60" style="fill:none;stroke:red;stroke-width:1" />
+        <text x="5" y="45" fill="black">转为待受理</text>
+    </svg>
+    <svg width="200" height="100">
+        <rect width="200" height="100" style="fill:lightblue;stroke-width:2;stroke:red" />
+        <text x="5" y="55" fill="black">案件定性和分配处理人</text>
+    </svg>
+    <svg height="100" width="110">
+        <polyline points="5,50 100,50 90,40 100,50 90,60" style="fill:none;stroke:red;stroke-width:1" />
+        <text x="5" y="45" fill="black">转为受理中</text>
+    </svg>
+    <svg width="200" height="100">
+        <rect width="200" height="100" style="fill:lightblue;stroke-width:2;stroke:red" />
+        <text x="5" y="55" fill="black">张三处理</text>
+    </svg>
+    <svg height="100" width="110">
+        <polyline points="5,50 100,50 90,40 100,50 90,60" style="fill:none;stroke:black;stroke-width:1" />
+        <text x="5" y="45" fill="black">处理人变更</text>
+    </svg>
+    <svg width="200" height="100" onclick="alert('hello')">
+        <rect width="200" height="100" style="fill:lightblue;stroke-width:1;stroke:lightblue" />
+        <text x="5" y="55" fill="black">姚森源处理</text>
+    </svg>
+    <svg height="100" width="110">
+        <polyline points="5,50 100,50 90,40 100,50 90,60" style="fill:none;stroke:black;stroke-width:1" />
+        <text x="5" y="45" fill="black">处理人变更</text>
+    </svg>
+    <svg width="200" height="100">
+        <rect width="200" height="100" style="fill:lightblue;stroke-width:1;stroke:lightblue" />
+        <text x="5" y="55" fill="black">周华奇处理</text>
+    </svg>
+
+    <svg height="100" width="110">
+        <polyline points="5,50 100,50 90,40 100,50 90,60" style="fill:none;stroke:black;stroke-width:1" />
+        <text x="5" y="45" fill="black">结案</text>
+    </svg>
+    <svg height="100" width="100">
+        <circle cx="50" cy="50" r="49" stroke="black" stroke-width="0" fill="lightblue" />
+        <text x="5" y="55" fill="black">案件处理结束</text>
+    </svg>
+</div>
+
+</body>
+</html>

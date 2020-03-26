@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>流程图</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        #canvas {
+            /*background-color: black;*/
+        }
+        #content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            color: #00a7d0;
+            font-size: 36px;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+<canvas id="canvas" width="100vw" height="100vh">
+
+</canvas>
+<div id="content">
+    <!--		我是前景-->
+</div>
+<script>
+    function $E(id) {
+        return document.getElementById(id);
+    }
+
+    class Circle {
+        constructor(x, y, radius, color, isFill, text) {
+            this.x = x;
+            this.y = y;
+            this.radius = radius;
+            this.color = color;
+            this.isFill = isFill;
+            this.text = text
+        }
+        draw(ctx) {
+            ctx.strokeStyle = this.color;
+            ctx.fillStyle = this.color;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI,true);
+            if (this.isFill) {
+                ctx.fill();
+            } else {
+                ctx.stroke();
+            }
+            ctx.font = "16px Arial";
+            ctx.fillStyle = "black";
+            ctx.fillText(this.text, this.x - this.radius, this.y + 10);
+        }
+    }
+
+    class Line {
+        constructor(sx, sy, ex, ey, color, text) {
+            this.sx = sx;
+            this.sy = sy;
+            this.ex = ex;
+            this.ey = ey;
+            this.color = color;
+            this.text = text
+        }
+        draw(ctx) {
+            ctx.strokeStyle = this.color;
+            ctx.moveTo(this.sx, this.sy);
+            ctx.lineTo(this.ex, this.ey);
+            ctx.stroke();
+            ctx.moveTo(this.ex, this.ey);
+            ctx.lineTo(this.ex - 10, this.ey - 10);
+            ctx.stroke();
+            ctx.moveTo(this.ex, this.ey);
+            ctx.lineTo(this.ex - 10, this.ey + 10);
+            ctx.stroke();
+            ctx.font = "16px Arial";
+            ctx.fillStyle = "black";
+            ctx.fillText(this.text, this.sx + 10, this.sy-5);
+        }
+    }
+
+    class Rectangle {
+        constructor(sx, sy, width, height, color, text) {
+            this.sx = sx;
+            this.sy = sy;
+            this.width = width;
+            this.height = height;
+            this.color = color;
+            this.text = text
+        }
+        draw(ctx) {
+            ctx.fillStyle = this.color;
+            ctx.fillRect(this.sx,this.sy,this.width,this.height);
+            ctx.font = "16px Arial";
+            ctx.fillStyle = "black";
+            ctx.fillText(this.text, this.sx + 10, this.sy + this.height/2);
+        }
+    }
+
+
+
+    window.onload = function () {
+        let canvas = $E("canvas");
+        let width = canvas.width = screen.availWidth;
+        let height = canvas.height = screen.availHeight;
+        let ctx = canvas.getContext("2d");
+        let shapes = [];
+        shapes.push(new Circle(100,100,50,"#CCCCCC",true,"售后申报案件"));
+        shapes.push(new Line(155,100,300,100,"#00FF00","转为待受理"));
+        shapes.push(new Rectangle(305,50,200,100,"#ffddd1","案件定性和分配处理人"));
+        shapes.push(new Line(510,100,660,100,"#330000","转为受理中"));
+        shapes.push(new Rectangle(665,50,200,100,"#ffddd1","姚森源处理"));
+        shapes.push(new Line(870,100,1025,100,"#00FF00","处理人变更"));
+        shapes.push(new Rectangle(1030,50,200,100,"#ffddd1","周华奇处理"));
+        shapes.push(new Line(1235,100,1285,100,"#00FF00","结案"));
+        shapes.push(new Circle(1340,100,50,"#e9292e",true,"案件处理结束"));
+        function renderZeroAndOne() {
+            ctx.clearRect(0,0,width,height);
+            for (let i = 0, len = shapes.length; i < len; i++) {
+                shapes[i].draw(ctx);
+            }
+        }
+        renderZeroAndOne();
+    }
+</script>
+</body>
+</html>
