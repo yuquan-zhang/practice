@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>星空2</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            /*overflow: hidden;*/
+        }
+        #canvas {
+            background-color: black;
+        }
+        #content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            color: #00a7d0;
+            font-size: 36px;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+<canvas id="canvas" width="100vw" height="100vh">
+
+</canvas>
+<button onclick="downloadImage()">download image</button>
+<div id="content">
+    <!--		我是前景-->
+</div>
+<script>
+    function $E(id) {
+        return document.getElementById(id);
+    }
+
+    class Star {
+        constructor(x, y, r, c) {
+            this.x = x;
+            this.y = y;
+            this.r = r;
+            this.c = "#" + c;
+            this.shadow = r;
+            this.add = 0.3;
+        }
+        flash() {
+            if (this.shadow >= this.r * 5) {
+                this.add = -0.3;
+            }
+            if (this.shadow <= this.r / 2) {
+                this.add = 0.3;
+            }
+            this.shadow = this.shadow + this.add;
+        }
+        draw(ctx) {
+            ctx.shadowColor = "white";
+            ctx.shadowBlur = this.shadow;
+            ctx.fillStyle = this.c;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI);
+            ctx.fill();
+        }
+    }
+
+
+
+    window.onload = function () {
+        let canvas = $E("canvas");
+        let width = canvas.width = screen.availWidth;
+        let height = canvas.height = screen.availHeight;
+        let ctx = canvas.getContext("2d");
+        let zeroAndOnes = [];
+        (function () {
+            for (let i = 0; i < 500; i++) {
+                let x = Math.floor(Math.random() * width);
+                let y = Math.floor(Math.random() * height / 3 * 2);
+                let r = Math.floor(Math.random() * 100) + 10;
+                let c = Math.floor(Math.random() * 8388608);
+                zeroAndOnes.push(new Star(x,y,r,c));
+            }
+        })();
+
+        function renderZeroAndOne() {
+            ctx.clearRect(0,0,width,height);
+            zeroAndOnes.forEach(function (item) {
+                item.flash();
+                item.draw(ctx);
+            })
+            // requestAnimationFrame(renderZeroAndOne);
+        }
+        renderZeroAndOne();
+    }
+
+    function downloadImage() {
+        let canvas = $E("canvas");
+        let a = document.createElement("a");
+        let d = new Date();
+        let ds = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDay()
+            + "s" + d.getHours() + "-" + d.getMinutes() + "-" + d.getSeconds();
+        a.download = 'starSky' + ds + '.jpeg';
+        a.href = canvas.toDataURL("image/jpeg", 1.0).replace(/^data:image\/[^;]/, 'data:application/octet-stream');
+        a.click();
+    }
+</script>
+</body>
+</html>

@@ -60,11 +60,10 @@
 		let width = canvas.width = screen.availWidth;
 		let height = canvas.height = screen.availHeight;
 		let ctx = canvas.getContext("2d");
-		ctx.font = "30px Arial";
-
 		let zeroAndOnes = [];
+
 		(function () {
-			for (let i = 0; i < 2000; i++) {
+			for (let i = 0; i < 1000; i++) {
 				let num = Math.random() > 0.5 ? 1 : 0;
 				let x = Math.floor(Math.random() * width);
 				let y = Math.floor(Math.random() * height);
@@ -76,13 +75,20 @@
 
 		function renderZeroAndOne() {
 			ctx.clearRect(0,0,width,height);
+			ctx.font = "30px Arial";
 			zeroAndOnes.forEach(function (item) {
 				item.addY(height);
 				item.draw(ctx);
 			})
+			// ctx.font = "300px Arial";
+			// ctx.strokeStyle = "rgba(255,255,255,1)";
+			// ctx.textAlign = "center";
+			// ctx.lineWidth = 2;
+			// ctx.strokeText("章勇", width / 2, height / 2);
+			requestAnimationFrame(renderZeroAndOne);
 		}
 		renderZeroAndOne();
-		setInterval(renderZeroAndOne, 10);
+		// setInterval(renderZeroAndOne, 10);
 	}
 </script>
 </body>

@@ -14,4 +14,8 @@ public class Addition {
         System.out.println("sum := " + sum);
         System.out.println("time spent := " + (System.currentTimeMillis() - start));
     }
+
+    public void test() {
+
+    }
 }

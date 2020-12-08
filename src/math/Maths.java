@@ -42,9 +42,29 @@ public class Maths {
         return r;
     }
 
+    public static int maxCommonDivider(int m, int n) {
+        int r = m % n;
+        while (r != 0) {
+            m = n;
+            n = r;
+            r = m % n;
+        }
+        return n;
+    }
+
     public static void main(String[] args) {
         System.out.println(pow(3,10));
         System.out.println(Math.sqrt(Double.MIN_VALUE));
-        System.out.println(sqrt(Double.MIN_VALUE,10));
+        System.out.println(sqrt(900000,10));
+        System.out.println(maxCommonDivider(119,544));
+        int a = - Integer.MAX_VALUE;
+        System.out.println(a);
+        System.out.println(-1 - Integer.MAX_VALUE);
+        System.out.println(byteToHexString((byte)127));
+    }
+
+    public static String byteToHexString(byte b) {
+        int a = b & 0xff;
+        return Integer.toHexString(b);
     }
 }

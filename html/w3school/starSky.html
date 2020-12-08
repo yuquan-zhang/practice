@@ -43,19 +43,19 @@
 			this.r = r;
 			this.c = "#" + c;
 			this.shadow = r;
-			this.add = 0.2;
+			this.add = 0.3;
 		}
 		flash() {
 			if (this.shadow >= this.r * 5) {
-				this.add = -0.2;
+				this.add = -0.3;
 			}
 			if (this.shadow <= this.r / 2) {
-				this.add = 0.2;
+				this.add = 0.3;
 			}
 			this.shadow = this.shadow + this.add;
 		}
 		draw(ctx) {
-			ctx.shadowColor = this.c;
+			ctx.shadowColor = "white";
 			ctx.shadowBlur = this.shadow;
 			ctx.fillStyle = this.c;
 			ctx.beginPath();
@@ -73,7 +73,7 @@
 		let ctx = canvas.getContext("2d");
 		let zeroAndOnes = [];
 		(function () {
-			for (let i = 0; i < 1000; i++) {
+			for (let i = 0; i < 50; i++) {
 				let x = Math.floor(Math.random() * width);
 				let y = Math.floor(Math.random() * height / 3 * 2);
 				let r = Math.floor(Math.random() * 20) + 5;
