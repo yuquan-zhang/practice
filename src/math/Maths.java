@@ -1,5 +1,8 @@
 package math;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 public class Maths {
     public static double abs(double y) {
         return y >= 0 ? y : -y;
@@ -25,9 +28,10 @@ public class Maths {
         if(x == 1) return 1;
         int count = 0;
         double precision = 1;
-        while(p > 0) {
+        int pc = p;
+        while(pc > 0) {
             precision /= 10;
-            p--;
+            pc--;
         }
         double r = x / 2;
         double r2 = x / r;
@@ -39,7 +43,7 @@ public class Maths {
         }
         System.out.println(count);
         if(x > 1 && round(r) * round(r) == x) return round(r);
-        return r;
+        return BigDecimal.valueOf(r).setScale(p,RoundingMode.FLOOR).doubleValue();
     }
 
     public static int maxCommonDivider(int m, int n) {
@@ -53,6 +57,9 @@ public class Maths {
     }
 
     public static void main(String[] args) {
+        BigDecimal bd = BigDecimal.valueOf(123.4567);
+        System.out.printf("人民币%.2f%n",bd);
+        System.out.println(sqrt(2,5));
         System.out.println(pow(3,10));
         System.out.println(Math.sqrt(Double.MIN_VALUE));
         System.out.println(sqrt(900000,10));

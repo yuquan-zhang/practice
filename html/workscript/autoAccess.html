@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自动访问</title>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+</head>
+<body>
+
+    <script>
+        function autoAccess() {
+            console.log("haha");
+            $.ajax({
+                url: "https://worker.zyxsnet.com/cgi/mb/evaluate/evalStd",
+                method:"POST",
+                data: JSON.stringify({
+                    "currentUserId":"6759346068162348032",
+                    "targetUserType":"USER_TYPE_EMPLOYEE"
+                }),
+                dataType:"json",
+                contentType:"application/json; charset=utf-8",
+                success:function (data) {
+                    console.log(data);
+                },
+                complete(jqXHR) {
+                    console.log(jqXHR);
+                }
+            })
+        }
+
+        setInterval(function (){
+            autoAccess();
+        },10000)
+    </script>
+</body>
+</html>

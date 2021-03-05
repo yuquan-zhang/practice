@@ -29,6 +29,96 @@
         let id = Math.round(Math.random() * 10000000000000000000);
         document.getElementById("app").style.color = "#" + toColorNum(id);
     }
+
+    let timeSegArr = [
+        {
+            "code": "TIME_SEG_09:00:00-12:00:00",
+            "createTime": "2020-12-15 17:10:53",
+            "delFlag": false,
+            "editable": false,
+            "id": "17001",
+            "name": "上午",
+            "remark": "",
+            "sort": 1,
+            "typeCode": "TIME_SEG",
+            "updateTime": "2020-12-15 17:10:53",
+            "value": "1"
+        },
+        {
+            "code": "TIME_SEG_13:00:00-20:00:00",
+            "createTime": "2020-12-15 17:10:53",
+            "delFlag": false,
+            "editable": false,
+            "id": "17002",
+            "name": "下午",
+            "remark": "",
+            "sort": 2,
+            "typeCode": "TIME_SEG",
+            "updateTime": "2020-12-15 17:10:53",
+            "value": "1"
+        },
+        {
+            "code": "TIME_SEG_08:00:00-12:00:00",
+            "createTime": "2020-12-15 17:10:53",
+            "delFlag": false,
+            "editable": false,
+            "id": "17003",
+            "name": "上午",
+            "remark": "",
+            "sort": 3,
+            "typeCode": "TIME_SEG",
+            "updateTime": "2020-12-15 17:10:53",
+            "value": "2"
+        },
+        {
+            "code": "TIME_SEG_13:00:00-15:00:00",
+            "createTime": "2020-12-15 17:10:53",
+            "delFlag": false,
+            "editable": false,
+            "id": "17004",
+            "name": "中午",
+            "remark": "",
+            "sort": 4,
+            "typeCode": "TIME_SEG",
+            "updateTime": "2020-12-15 17:10:53",
+            "value": "2"
+        },
+        {
+            "code": "TIME_SEG_16:00:00-18:00:00",
+            "createTime": "2020-12-15 17:10:53",
+            "delFlag": false,
+            "editable": false,
+            "id": "17005",
+            "name": "下午",
+            "remark": "",
+            "sort": 5,
+            "typeCode": "TIME_SEG",
+            "updateTime": "2020-12-15 17:10:53",
+            "value": "2"
+        }
+    ];
+    let timeSegTranMap = {};
+    timeSegArr.forEach(item => {
+        let code = item.code;
+        code = code.split("_")[2] || code;
+        timeSegTranMap[code] = item.name;
+    })
+    function getNameByTimeSeg(timeSeg) {
+        return timeSegTranMap[timeSeg] || "";
+    }
+    console.log("09:00:00-12:00:00",getNameByTimeSeg("09:00:00-12:00:00"))
+    console.log("08:00:00-12:00:00",getNameByTimeSeg("08:00:00-12:00:00"))
+    console.log("13:00:00-15:00:00",getNameByTimeSeg("13:00:00-15:00:00"))
+    let timeSegMap = {};
+    let maxValue = 0;
+    timeSegArr.forEach(item => {
+        maxValue = Math.max(maxValue, item.value);
+        let tempSegArr = timeSegMap[item.value] || [];
+        tempSegArr.push(item);
+        timeSegMap[item.value] = tempSegArr;
+    })
+    let newestTimeSegArr = timeSegMap[maxValue]; // 获得最新时间分段
+    console.log(newestTimeSegArr);
 </script>
 </body>
 </html>

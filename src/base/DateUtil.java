@@ -1,5 +1,6 @@
 package base;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -12,5 +13,12 @@ public class DateUtil {
         long day = 24 * 60 * 60 * 1000;
 
         System.out.println((int) (day * 3 - 1)/day);
+        fmt(new Date());
+        System.out.println(Long.parseLong("000123"));
+    }
+
+    public static void fmt(Date date) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        System.out.println(sdf.format(date));
     }
 }

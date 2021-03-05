@@ -10,6 +10,9 @@ public class StringUtils {
         System.out.println(pureFileName("/abc/langldng.jpg"));
         System.out.println(pureFileName("thisisatest.jpg"));
         System.out.println(pureFileName("thisisatest.jpg/"));
+        String phone = "15821118384";
+        System.out.println(phone.substring(6));
+        System.out.println(phone.substring(phone.length() - 6));
     }
 
     private static String pureFileName(String fileName) {
