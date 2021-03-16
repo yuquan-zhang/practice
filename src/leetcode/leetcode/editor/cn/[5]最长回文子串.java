@@ -44,7 +44,7 @@ package leetcode.leetcode.editor.cn;//给你一个字符串 s，找到 s 中最�
 
 
 //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
+class Solution5 {
     public String longestPalindrome(String s) {
         if (null == s || s.length() < 2) return s;
         int start = 0, end = 1;
@@ -70,11 +70,11 @@ class Solution {
     }
 
     public static void main(String[] args) {
-        System.out.println(new Solution().longestPalindrome("babad"));
-        System.out.println(new Solution().longestPalindrome("cbbd"));
-        System.out.println(new Solution().longestPalindrome("a"));
-        System.out.println(new Solution().longestPalindrome("ac"));
-        System.out.println(new Solution().longestPalindrome("aaaa"));
+        System.out.println(new Solution5().longestPalindrome("babad"));
+        System.out.println(new Solution5().longestPalindrome("cbbd"));
+        System.out.println(new Solution5().longestPalindrome("a"));
+        System.out.println(new Solution5().longestPalindrome("ac"));
+        System.out.println(new Solution5().longestPalindrome("aaaa"));
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
