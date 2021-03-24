@@ -134,8 +134,7 @@ class Solution {
                 break;
             }
         }
-        if (sb.length() == 0) return 0;
-        if (sb.length() == 1 && (sb.charAt(0) == '-' || sb.charAt(0) == '+')) return 0;
+        if (sb.length() <= 1) return 0;
         if (sb.length() < 11) return Integer.parseInt(sb.toString());
         if (sb.charAt(0) == '-' && (sb.length() > 11 || (sb.length() == 11
                 && sb.toString().compareTo(String.valueOf(Integer.MIN_VALUE)) > 0))) {
