@@ -45,7 +45,7 @@ package leetcode.leetcode.editor.cn;//给你一个 32 位的有符号整数 x �
 
 
 //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
+class Solution7 {
     public int reverse(int x) {
         boolean isMinus = x < 0;
         String s = String.valueOf(x);
@@ -73,12 +73,12 @@ class Solution {
     }
 
     public static void main(String[] args) {
-        System.out.println(new Solution().reverse(1234));
-        System.out.println(new Solution().reverse(-1234));
-        System.out.println(new Solution().reverse(120));
-        System.out.println(new Solution().reverse(0));
-        System.out.println(new Solution().reverse(Integer.MAX_VALUE));
-        System.out.println(new Solution().reverse(Integer.MIN_VALUE));
+        System.out.println(new Solution7().reverse(1234));
+        System.out.println(new Solution7().reverse(-1234));
+        System.out.println(new Solution7().reverse(120));
+        System.out.println(new Solution7().reverse(0));
+        System.out.println(new Solution7().reverse(Integer.MAX_VALUE));
+        System.out.println(new Solution7().reverse(Integer.MIN_VALUE));
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
