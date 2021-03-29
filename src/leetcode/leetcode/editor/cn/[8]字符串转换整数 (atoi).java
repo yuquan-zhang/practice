@@ -112,7 +112,7 @@ package leetcode.leetcode.editor.cn;//请你来实现一个 myAtoi(string s) 函
 
 
 //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
+class Solution8 {
     public int myAtoi(String s) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0, len = s.length(); i < len; i++) {
@@ -148,20 +148,20 @@ class Solution {
     }
 
     public static void main(String[] args) {
-        System.out.println(new Solution().myAtoi("+2147483648"));
-        System.out.println(new Solution().myAtoi("    +1146905820n1"));
-        System.out.println(new Solution().myAtoi("-2147483647"));
-        System.out.println(new Solution().myAtoi("42"));
-        System.out.println(new Solution().myAtoi("+42"));
-        System.out.println(new Solution().myAtoi("   -42"));
-        System.out.println(new Solution().myAtoi("words and 987"));
-        System.out.println(new Solution().myAtoi("4193 with words"));
-        System.out.println(new Solution().myAtoi("-91283472332"));
-        System.out.println(new Solution().myAtoi("-"));
-        System.out.println(new Solution().myAtoi("+-"));
-        System.out.println(new Solution().myAtoi("0000000000012345678"));
-        System.out.println(new Solution().myAtoi("00000-42a1234"));
-        System.out.println(new Solution().myAtoi("010"));
+        System.out.println(new Solution8().myAtoi("+2147483648"));
+        System.out.println(new Solution8().myAtoi("    +1146905820n1"));
+        System.out.println(new Solution8().myAtoi("-2147483647"));
+        System.out.println(new Solution8().myAtoi("42"));
+        System.out.println(new Solution8().myAtoi("+42"));
+        System.out.println(new Solution8().myAtoi("   -42"));
+        System.out.println(new Solution8().myAtoi("words and 987"));
+        System.out.println(new Solution8().myAtoi("4193 with words"));
+        System.out.println(new Solution8().myAtoi("-91283472332"));
+        System.out.println(new Solution8().myAtoi("-"));
+        System.out.println(new Solution8().myAtoi("+-"));
+        System.out.println(new Solution8().myAtoi("0000000000012345678"));
+        System.out.println(new Solution8().myAtoi("00000-42a1234"));
+        System.out.println(new Solution8().myAtoi("010"));
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
