@@ -50,7 +50,7 @@ package leetcode.leetcode.editor.cn;//给你一个整数 x ，如果 x 是一个
 
 
 //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
+class Solution9 {
 
     public boolean isPalindrome(int x) {
         String s = String.valueOf(x);
