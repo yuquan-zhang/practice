@@ -39,11 +39,8 @@ package leetcode.leetcode.editor.cn;//通常，正整数 n 的阶乘是所有小
 // 👍 87 👎 0
 
 
-import java.util.ArrayList;
-import java.util.List;
-
 //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
+class Solution1006 {
     public int clumsy(int N) {
         if (N == 1) return 1;
         if (N == 2) return 2;
@@ -78,7 +75,7 @@ class Solution {
     }
 
     private static void test(int expect, int N) {
-        int result = new Solution().clumsy(N);
+        int result = new Solution1006().clumsy(N);
         System.out.println("expect is " + expect + " == result is " + result);
     }
 }
