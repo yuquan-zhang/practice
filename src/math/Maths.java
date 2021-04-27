@@ -57,6 +57,11 @@ public class Maths {
     }
 
     public static void main(String[] args) {
+        double d = 500.0 / 2400000;
+        for (int i = 1; i < 500; i++) {
+            d *= (double) (2400000 - i) / 2400000;
+        }
+        System.out.println(d);
         BigDecimal bd = BigDecimal.valueOf(123.4567);
         System.out.printf("人民币%.2f%n",bd);
         System.out.println(sqrt(2,5));

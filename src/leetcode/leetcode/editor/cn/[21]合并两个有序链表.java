@@ -47,9 +47,21 @@ package leetcode.leetcode.editor.cn;//将两个升序链表合并为一个新的
  *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
  * }
  */
-class Solution {
+class Solution21 {
     public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
-        return null;
+        if (l1 == null && l2 == null) return null;
+        if (l1 == null) return l2;
+        if (l2 == null) return l1;
+        ListNode ans = null;
+        if (l1.val < l2.val) {
+            ans = new ListNode(l1.val);
+            l1 = l1.next;
+        } else {
+            ans = new ListNode(l2.val);
+            l2 = l2.next;
+        }
+        ans.next = mergeTwoLists(l1, l2);
+        return ans;
     }
 
     static class ListNode {
@@ -58,6 +70,6 @@ class Solution {
       ListNode() {}
       ListNode(int val) { this.val = val; }
       ListNode(int val, ListNode next) { this.val = val; this.next = next; }
-  }
+    }
 }
 //leetcode submit region end(Prohibit modification and deletion)
