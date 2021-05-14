@@ -34,7 +34,7 @@ public class MyMath {
             }
             m = (low + high) / 2;
             decimal = "" + m;
-            decimal = decimal.substring(decimal.lastIndexOf(".")+1, decimal.length());
+            decimal = decimal.substring(decimal.lastIndexOf(".")+1);
         }
         return m;
     }
@@ -115,6 +115,11 @@ public class MyMath {
     }
 
     public static void main(String[] args) {
+        boolean[][] row = new boolean[9][9];
+        System.out.println(row[0][0]);
+        char a = '2';
+        int i = a - 49;
+        System.out.println(i);
         System.out.println(isMatch2("abbabaaabbabbaababbabbbbbabbbabbbabaaaaababababbbabababaabbababaabbbbbbaaaabababbbaabbbbaabbbbababababbaabbaababaabbbababababbbbaaabbbbbabaaaabbababbbbaababaabbababbbbbababbbabaaaaaaaabbbbbaabaaababaaaabb"
                 ,"**aa*****ba*a*bb**aa*ab****a*aaaaaa***a*aaaa**bbabb*b*b**aaaaaaaaa*a********ba*bbb***a*ba*bb*bb**a*b*bb"));
     }

@@ -73,7 +73,7 @@ import java.util.List;
  *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
  * }
  */
-class Solution {
+class Solution25 {
     public ListNode reverseKGroup(ListNode head, int k) {
         if (head == null || head.next == null || k == 1) return head;
         ListNode th = head;
