@@ -38,7 +38,7 @@ package leetcode.leetcode.editor.cn;
 
 
 //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
+class Solution45 {
     public int jump(int[] nums) {
         int len = nums.length;
         int p = 0;
