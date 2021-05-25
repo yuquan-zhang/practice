@@ -37,54 +37,36 @@ package leetcode.leetcode.editor.cn;
 // 👍 1365 👎 0
 
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
+class Solution46 {
     public List<List<Integer>> permute(int[] nums) {
-        int len = nums.length;
-        List<List<Integer>> ans = new ArrayList<>();
-        ans.add(getList(nums));
-        int sum = 1;
-        while (len > 1) {
-            sum *= len;
-            len--;
+        List<List<Integer>> res = new ArrayList<>();
+
+        List<Integer> output = new ArrayList<>();
+        for (int num : nums) {
+            output.add(num);
         }
-        len = nums.length;
-        int i = len - 1;
-        int ct = 1;
-        while (ct++ < sum) {
-            int temp = nums[i];
-            nums[i] = nums[i-1];
-            nums[i-1] = temp;
-            ans.add(getList(nums));
-            if (ct % 120 == 0) {
-                i = len - 5;
-            } else if (ct % 24 == 0) {
-                i = len - 4;
-            } else if (ct % 6 == 0) {
-                i = len - 3;
-            } else if (ct % 2 == 0) {
-                i = len - 2;
-            } else {
-                i = len - 1;
-            }
-        }
-        return ans;
+
+        int n = nums.length;
+        backtrack(n, output, res, 0);
+        return res;
     }
 
-    private List<Integer> getList(int[] nums) {
-        List<Integer> list = new ArrayList<>();
-        for (int i : nums) {
-            list.add(i);
+    public void backtrack(int n, List<Integer> output, List<List<Integer>> res, int first) {
+        // 所有数都填完了
+        if (first == n) {
+            res.add(new ArrayList<>(output));
         }
-        return list;
-    }
-
-    public static void main(String[] args) {
-        int[] test = {1,2,3,4,5,6};
-        System.out.println(new Solution().permute(test));
+        for (int i = first; i < n; i++) {
+            // 动态维护数组
+            Collections.swap(output, first, i);
+            // 继续递归填下一个数
+            backtrack(n, output, res, first + 1);
+            // 撤销操作
+            Collections.swap(output, first, i);
+        }
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
