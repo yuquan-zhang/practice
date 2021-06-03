@@ -63,7 +63,7 @@ package leetcode.leetcode.editor.cn;
 import java.util.Stack;
 
 //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
+class Solution71 {
     public String simplifyPath(String path) {
         String[] ps = path.split("/");
         Stack<String> stack = new Stack<>();
